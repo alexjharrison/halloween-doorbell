@@ -29,6 +29,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api',
+    '@nuxtjs/pwa',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -41,8 +42,12 @@ export default {
     '@nuxtjs/pwa',
   ],
 
+  serverMiddleware: ['~/api/index.ts'],
+
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseUrl: 'https://doorbell.aharrison.xyz',
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},

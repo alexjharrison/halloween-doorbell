@@ -19,7 +19,8 @@
       "@types/node",
       "@types/dom-mediacapture-record",
       "@nuxt/types",
-      "@nuxtjs/composition-api"
+      "@nuxtjs/composition-api",
+      "express"
     ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]

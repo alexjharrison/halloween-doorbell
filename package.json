@@ -14,10 +14,10 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/composition-api": "^0.13.5",
-    "@nuxtjs/pwa": "^3.0.2",
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "nuxt": "^2.14.6"
   },
   "devDependencies": {
@@ -26,6 +26,7 @@
     "@nuxtjs/eslint-config": "^3.1.0",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/pwa": "^3.2.2",
     "@types/dom-mediacapture-record": "^1.0.7",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.10.0",

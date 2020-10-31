@@ -1,16 +1,27 @@
+const axios = require('axios')
+
 interface Store {
   isSomeoneThere: boolean
   volumeThreshold: number
 }
 
-export const store: () => Store = () => ({
+export const state: () => Store = () => ({
   isSomeoneThere: false,
-  volumeThreshold: 40,
+  volumeThreshold: 100,
 })
 
 export const mutations = {
   setIsSomeoneThere(state: Store, val: boolean) {
     state.isSomeoneThere = val
+    axios.post('/api', state)
+  },
+  setVolumeThreshold(state: Store, val: number) {
+    state.volumeThreshold = val
+    axios.post('/api', state)
+  },
+  updateStore(state: Store, newStore: Store) {
+    state.isSomeoneThere = newStore.isSomeoneThere
+    state.volumeThreshold = newStore.volumeThreshold
   },
 }
 
