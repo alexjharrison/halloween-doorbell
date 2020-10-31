@@ -18,6 +18,7 @@
     "types": [
       "@types/node",
       "@types/dom-mediacapture-record",
+      "@types/dom-screen-wake-lock",
       "@nuxt/types",
       "@nuxtjs/composition-api",
       "express"

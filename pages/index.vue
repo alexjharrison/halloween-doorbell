@@ -25,6 +25,7 @@ interface Datum {
   devices: MediaDeviceInfo[]
   selectedDeviceId: string
   dataArray: number[]
+  noSleep: any
 }
 
 export default defineComponent({
@@ -34,10 +35,12 @@ export default defineComponent({
       devices: [],
       selectedDeviceId: '',
       dataArray: [],
+      noSleep: null,
     }
     return data
   },
   mounted() {
+    // ask for microphone to use
     navigator.mediaDevices.enumerateDevices().then(devices => {
       this.devices = devices
     })
@@ -60,6 +63,12 @@ export default defineComponent({
       if (!this.isSomeoneThere && volume > this.volumeThreshold) {
         this.$store.dispatch('dingDong')
       }
+    },
+    selectedDevice() {
+      // disable wakelock after mic selection
+      const NoSleep = require('nosleep.js')
+      this.noSleep = new NoSleep()
+      this.noSleep.enable()
     },
   },
   methods: {

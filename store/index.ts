@@ -29,7 +29,7 @@ export const actions = {
   dingDong({ commit }: any) {
     commit('setIsSomeoneThere', true)
 
-    const coolDownSeconds = 10
+    const coolDownSeconds = 30
     setTimeout(() => {
       commit('setIsSomeoneThere', false)
     }, coolDownSeconds * 1000)
