@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-interface Store {
+export interface Store {
   isSomeoneThere: boolean
   volumeThreshold: number
 }

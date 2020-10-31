@@ -29,6 +29,7 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import Yell from '@/components/Yell.vue'
 import CandyTime from '@/components/CandyTime.vue'
+import { Store } from '~/store'
 
 interface Datum {
   devices: MediaDeviceInfo[]
@@ -70,13 +71,18 @@ export default defineComponent({
         navigator.mediaDevices.getUserMedia({ audio: true })
       } catch (e) {
         window.location.reload()
-        console.log(e)
       }
 
       // get list of microphones after first interaction
       navigator.mediaDevices.enumerateDevices().then(devices => {
         this.devices = devices
       })
+
+      setInterval(() => {
+        this.$axios
+          .$get('https://doorbell.aharrison.xyz/api')
+          .then((res: Store) => this.$store.commit('updateStore', res))
+      }, 2000)
     },
     maxVolume(volume) {
       if (!this.isSomeoneThere && volume > this.volumeThreshold) {

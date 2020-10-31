@@ -18,6 +18,7 @@
     <div
       v-else
       class="children-here h-100 d-flex justify-content-center align-items-center"
+      @click="shutUp"
     >
       <div>
         <h1>!!!</h1>
@@ -67,6 +68,9 @@ export default {
           .$get('https://doorbell.aharrison.xyz/api')
           .then(res => this.$store.commit('updateStore', res))
       }, 2000)
+    },
+    shutUp() {
+      this.honkAudio.pause()
     },
   },
 }

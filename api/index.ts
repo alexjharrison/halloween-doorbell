@@ -1,16 +1,12 @@
 import express from 'express'
-
-interface Store {
-  isSomeoneThere: boolean
-  volumeThreshold: number
-}
+import { Store } from '~/store'
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const state = {
+const state: Store = {
   isSomeoneThere: false,
   volumeThreshold: 100,
 }
