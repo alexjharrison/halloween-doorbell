@@ -64,7 +64,7 @@ export default defineComponent({
         this.$store.dispatch('dingDong')
       }
     },
-    selectedDevice() {
+    selectedDeviceId() {
       // disable wakelock after mic selection
       const NoSleep = require('nosleep.js')
       this.noSleep = new NoSleep()
