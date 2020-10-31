@@ -1,13 +1,22 @@
 <template>
   <main>
-    <div v-if="!selectedDeviceId">
-      <ul>
-        <li
-          v-for="(device, i) in devices"
-          :key="i"
-          @click="startRecording(device.deviceId)"
-        >
-          {{ device.label }}
+    <div v-if="!hasInteracted" class="d-flex justify-content-center mt-5">
+      <b-button size="lg" variant="light" @click="hasInteracted = true"
+        >Click Me to Start</b-button
+      >
+    </div>
+    <div v-else-if="!selectedDeviceId">
+      <h1 class="m-3">Pick a microphone to listen to</h1>
+      <ul class="list-unstyled">
+        <li v-for="(device, i) in devices" :key="i">
+          <b-button
+            variant="light"
+            class="ml-4 mt-3"
+            size="sm"
+            @click="startRecording(device.deviceId)"
+          >
+            {{ device.label }}
+          </b-button>
         </li>
       </ul>
     </div>
@@ -25,6 +34,7 @@ interface Datum {
   devices: MediaDeviceInfo[]
   selectedDeviceId: string
   dataArray: number[]
+  hasInteracted: boolean
   noSleep: any
 }
 
@@ -35,15 +45,10 @@ export default defineComponent({
       devices: [],
       selectedDeviceId: '',
       dataArray: [],
+      hasInteracted: false,
       noSleep: null,
     }
     return data
-  },
-  mounted() {
-    // ask for microphone to use
-    navigator.mediaDevices.enumerateDevices().then(devices => {
-      this.devices = devices
-    })
   },
   computed: {
     maxVolume() {
@@ -59,6 +64,20 @@ export default defineComponent({
     },
   },
   watch: {
+    hasInteracted() {
+      // ask user for permission
+      try {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+      } catch (e) {
+        window.location.reload()
+        console.log(e)
+      }
+
+      // get list of microphones after first interaction
+      navigator.mediaDevices.enumerateDevices().then(devices => {
+        this.devices = devices
+      })
+    },
     maxVolume(volume) {
       if (!this.isSomeoneThere && volume > this.volumeThreshold) {
         this.$store.dispatch('dingDong')
