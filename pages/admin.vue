@@ -56,7 +56,7 @@ export default {
     },
   },
   mounted() {
-    this.honkAudio = new Audio('honk.wav')
+    this.honkAudio = new Audio('https://doorbell.aharrison.xyz/honk.wav')
     this.honkAudio.loop = true
     this.startInterval()
   },
